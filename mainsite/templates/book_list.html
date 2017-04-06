@@ -1,0 +1,63 @@
+{% extends 'home.html' %}
+{% block title %} Book List {% endblock title%}
+
+{% load static %}
+
+{% block javascript %}
+<script src="/mainsite/system/static/books.js"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <h1 class="page-header">Books</h1>
+    <!--BUTTON TO TRIGGER THE ACTION -->
+    <p>
+        <button type="button" class="btn btn-primary js-create-book">
+            <span class="glyphicon glyphicon-plus"></span>
+            New Book</button>
+    </p>
+
+    <!--MODAL WE'LL BE USING-->
+    <div class="modal fade" id="modal-book">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <table class="table" id="book-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Type</th>
+                    <th>Publication Date</th>
+                    <th>Pages</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in book_list %}
+            <tr>
+                <td>{{ book.id }}</td>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.get_book_type_display }}</td>
+                <td>{{ book.publication_date }}</td>
+                <td>{{ book.pages }}</td>
+                <td>{{ book.price }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center bg-warning">No Book</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
